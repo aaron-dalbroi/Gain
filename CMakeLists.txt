@@ -27,10 +27,10 @@ juce_add_plugin(Gain
 
 # 4. Add Source Files
 target_sources(Gain PRIVATE
-    Source/PluginProcessor.cpp
-    Source/PluginProcessor.h
-    Source/PluginEditor.cpp
-    Source/PluginEditor.h
+    src/PluginProcessor.cpp
+    src/PluginProcessor.h
+    src/PluginEditor.cpp
+    src/PluginEditor.h
 )
 
 # 5. Link JUCE Modules (Fixed target name from MyAudioPlugin to Gain)
@@ -40,6 +40,3 @@ target_link_libraries(Gain PRIVATE
     juce::juce_gui_extra
     juce::juce_graphics
 )
-
-# 6. Set C++ Standard (Fixed target name to Gain)
-juce_set_cpp_standard(Gain 20)
