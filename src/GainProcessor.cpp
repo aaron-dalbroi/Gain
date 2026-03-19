@@ -151,6 +151,9 @@ void GainProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::MidiBuf
 		auto* channelData = buffer.getWritePointer(channel);
 
 		// ..do something to the data...
+		float db_gain = processorState.getRawParameterValue("Gain")->load();
+		buffer.applyGain(juce::Decibels::decibelsToGain(db_gain));
+
 	}
 }
 
@@ -183,7 +186,7 @@ void GainProcessor::setStateInformation(const void* data, int sizeInBytes)
 juce::AudioProcessorValueTreeState::ParameterLayout GainProcessor::CreateParameterLayout()
 {
 	juce::AudioProcessorValueTreeState::ParameterLayout layout = juce::AudioProcessorValueTreeState::ParameterLayout();
-	layout.add(std::make_unique<juce::AudioParameterFloat>("gain", "Gain",juce::NormalisableRange<float>(-18.0f,18.0f,0.01f,1.0f,0),0.0f));
+	layout.add(std::make_unique<juce::AudioParameterFloat>("Gain", "Gain",juce::NormalisableRange<float>(-18.0f,18.0f,0.01f,1.0f,0),0.0f));
 	
 	return layout;
 }
