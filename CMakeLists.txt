@@ -22,7 +22,8 @@ juce_add_plugin(Gain
     IS_MIDI_EFFECT FALSE
     EDITOR_WANTS_KEYBOARD_FOCUS TRUE
     COPY_PLUGIN_AFTER_BUILD FALSE      
-    FORMATS VST3 Standalone            
+    FORMATS VST3 Standalone
+    JUCE_VST3_CAN_REPLACE_VST2 FALSE            
 )
 
 # 4. Add Source Files

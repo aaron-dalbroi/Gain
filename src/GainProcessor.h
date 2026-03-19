@@ -43,6 +43,26 @@ public:
 	void getStateInformation(juce::MemoryBlock& destData) override;
 	void setStateInformation(const void* data, int sizeInBytes) override;
 
+	//==============================================================================
+	
+	/**
+	 * @brief Creates the parameter layout for the AudioProcessorValueTreeState.
+	 *
+	 * Define all the parameters that your plugin will use here.
+	 *
+	 * @return ParameterLayout object containing all parameters and parameter
+	 *         groups that the GainProcessor will use.
+	 */
+	juce::AudioProcessorValueTreeState::ParameterLayout CreateParameterLayout();
+	
+	/**
+	 * @brief Manages the processor's parameter state and UI control binding.
+	 *
+	 * Holds all plugin parameters and facilitates two-way synchronization
+	 * between the processor's state and the UI controls in the editor.
+	 */
+	juce::AudioProcessorValueTreeState processorState;
+
 private:
 	//==============================================================================
 	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(GainProcessor)

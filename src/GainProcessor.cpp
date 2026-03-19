@@ -13,9 +13,11 @@ GainProcessor::GainProcessor()
 #endif
 		.withOutput("Output", juce::AudioChannelSet::stereo(), true)
 #endif
-	)
-#endif
+	),processorState(*this, nullptr, "PARAMETERS", CreateParameterLayout())
+#endif	
 {
+
+	
 }
 
 GainProcessor::~GainProcessor()
@@ -160,7 +162,8 @@ bool GainProcessor::hasEditor() const
 
 juce::AudioProcessorEditor* GainProcessor::createEditor()
 {
-	return new GainProcessorEditor(*this);
+	//return new GainProcessorEditor(*this);
+	return new juce::GenericAudioProcessorEditor(*this);
 }
 
 //==============================================================================
@@ -175,6 +178,14 @@ void GainProcessor::setStateInformation(const void* data, int sizeInBytes)
 {
 	// You should use this method to restore your parameters from this memory block,
 	// whose contents will have been created by the getStateInformation() call.
+}
+
+juce::AudioProcessorValueTreeState::ParameterLayout GainProcessor::CreateParameterLayout()
+{
+	juce::AudioProcessorValueTreeState::ParameterLayout layout = juce::AudioProcessorValueTreeState::ParameterLayout();
+	layout.add(std::make_unique<juce::AudioParameterFloat>("gain", "Gain",juce::NormalisableRange<float>(-18.0f,18.0f,0.01f,1.0f,0),0.0f));
+	
+	return layout;
 }
 
 
